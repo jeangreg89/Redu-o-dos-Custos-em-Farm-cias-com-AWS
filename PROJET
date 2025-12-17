@@ -1,0 +1,164 @@
+# RELATÓRIO DE IMPLEMENTAÇÃO DE SERVIÇOS AWS
+
+
+Data: 17/12/2025
+
+Empresa: Abstergo Industries 
+Responsável: Jean Greguere Santos Millien
+
+
+## Introdução
+
+Este relatório apresenta o processo de implementação de ferramentas na empresa Abstergo Industries, realizado por Jean Greguere Santos Millien. 
+O objetivo do projeto foi elencar 3 serviços AWS, com a finalidade de realizar diminuição de custos imediatos, melhor performance operacional, e maior segurança no armazenamento e processamento de dados.
+
+A iniciativa surgiu da necessidade de substituir servidores físicos de alto custo por soluções em nuvem escaláveis, seguras e com pagamento conforme o uso.
+
+## Descrição do Projeto
+
+O projeto foi estruturado em três etapas, cada uma representando uma categoria essencial da infraestrutura corporativa: armazenamento, computação e monitoramento.
+
+Etapa 1: 
+Armazenamento: Amazon S3 (Simple Storage Service)
+
+Para que serve
+
+O Amazon S3 é um serviço de armazenamento de objetos que permite guardar e recuperar qualquer quantidade de dados a qualquer momento, com alta durabilidade (99,999999999%) e disponibilidade global. Ele é usado para backups, armazenamento de arquivos corporativos, hospedagem de sites estáticos e big data analytics.
+
+Principais características
+
+Escalabilidade automática: aumenta ou diminui a capacidade conforme o volume de dados.
+Classes de armazenamento variadas: como S3 Standard, S3 IntelligentTiering, S3 StandardIA e S3 Glacier Deep Archive, otimizando custos conforme a frequência de acesso.
+ 
+Segurança avançada: integração com AWS Identity and Access Management (IAM) e AWS Key Management Service (KMS) para criptografia de dados.
+
+Alta disponibilidade e replicação geográfica entre regiões.
+Controle de acesso granular, com políticas baseadas em usuário, grupo ou bucket.
+
+Vantagens
+
+	Custo reduzido (pagamento apenas pelo uso).
+	Armazenamento praticamente ilimitado.
+	Segurança e confiabilidade elevadas.
+	Integração nativa com outras ferramentas AWS.
+
+Desvantagens
+
+•	Tempo de acesso maior em classes de arquivamento profundo (ex: Glacier).
+•	Cobrança separada por requisições e transferências de dados, o que exige controle.
+•	Necessidade de configuração cuidadosa para evitar acessos públicos acidentais.
+
+Processo de implementação na Abstergo Industries
+
+A Abstergo migrou arquivos de servidores locais para o S3, configurando a classe IntelligentTiering, que utiliza IA para mover automaticamente dados entre camadas de acesso, reduzindo custos sem perda de performance.
+Foi ativada a criptografia automática com KMS e aplicado o S3 Block Public Access para impedir qualquer exposição de dados.
+Os backups diários passaram a ser armazenados no S3 Glacier Deep Archive, com custo até 90% menor que o armazenamento local anterior.
+
+Exemplo de caso de sucesso
+
+Uma implementação semelhante ocorreu na empresa Netflix, que utiliza o Amazon S3 para armazenar petabytes de conteúdo de mídia. Graças à escalabilidade e durabilidade, a empresa conseguiu reduzir drasticamente custos de infraestrutura e garantir disponibilidade global de seus vídeos.
+
+Etapa 2: 
+
+Computação: Amazon EC2 com Auto Scaling, Savings Plans e Spot Instances
+
+Para que serve
+
+O Amazon Elastic Compute Cloud (EC2) fornece servidores virtuais configuráveis na nuvem, permitindo executar sistemas, aplicações e bancos de dados sem precisar investir em hardware físico.
+É o serviço base da AWS para computação elástica sob demanda.
+
+Principais características
+
+Instâncias personalizáveis: diferentes famílias (ex: t, m, r, c) otimizadas para uso geral, memória ou computação intensiva.
+Auto Scaling: ajusta automaticamente o número de instâncias conforme a carga de trabalho.
+Elastic Load Balancing: distribui o tráfego entre instâncias para evitar sobrecarga.
+Savings Plans e Reserved Instances: permitem economias de até 70% em uso contínuo.
+Spot Instances: aproveitam capacidade ociosa da AWS com preços até 90% menores.
+Segurança: integração com IAM, Security Groups e VPCs para controle de acesso e isolamento de rede.
+
+Vantagens
+
+	Pagamento sob demanda — paga apenas pelo tempo de execução.
+	Flexibilidade de dimensionamento (escala horizontal e vertical).
+	Diversas opções de economia (Savings Plans, Spot, Reserved).
+	Alta disponibilidade e resiliência global.
+
+Desvantagens
+
+	Configuração inicial complexa para quem não domina AWS.
+	Spot Instances podem ser interrompidas sem aviso (ideal só para tarefas não críticas).
+	Custos podem subir rapidamente se o monitoramento não for bem controlado.
+
+Processo de implementação na Abstergo Industries
+
+A empresa substituiu os servidores físicos do ERP por instâncias m6g.large (Graviton2), obtendo melhor desempenho com menor custo energético.
+Implementou Auto Scaling para gerenciar picos de uso e Savings Plans para cargas fixas de produção.
+Ambientes de teste passaram a usar Spot Instances, que reduzem custos sem afetar a operação principal.
+
+Exemplo de caso de sucesso
+
+A Airbnb adotou EC2 com Auto Scaling e Spot Instances para lidar com variações de tráfego sazonais. O resultado foi uma redução de 30% nos custos de computação e aumento da disponibilidade global durante picos de reservas.
+
+Etapa 3: Monitoramento e Governança: AWS CloudWatch + AWS Lambda + AWS Budgets
+ 
+Para que serve
+
+O Amazon CloudWatch é o serviço de monitoramento e observabilidade da AWS, que coleta métricas, logs e eventos em tempo real de toda a infraestrutura em nuvem.
+Ele ajuda a detectar falhas, otimizar desempenho e controlar custos.
+
+Principais características
+
+Coleta automática de métricas de CPU, memória, tráfego e latência.
+Dashboards interativos e personalizados.
+Alarmes configuráveis com integração ao Amazon SNS e AWS Lambda.
+Logs centralizados via CloudWatch Logs e Insights.
+Integração com AWS Budgets, permitindo controle financeiro em tempo real.
+
+Vantagens
+
+	Detecção precoce de falhas e gargalos.
+	Automação de respostas (via Lambda).
+	Controle orçamentário e previsibilidade de gastos.
+	Melhora a governança e a tomada de decisão.
+
+Desvantagens
+
+	Excesso de métricas pode gerar ruído se mal configurado.
+	Alguns recursos avançados exigem custo adicional (ex: Logs Insights).
+
+Processo de implementação na Abstergo Industries
+
+O CloudWatch foi integrado ao EC2 e ao S3 para monitorar o uso e custos diários.
+Foram criados dashboards centralizados e alarmes automatizados para desligar instâncias ociosas usando funções Lambda.
+O AWS Budgets foi configurado para bloquear gastos que ultrapassassem o limite definido, prevenindo estouros orçamentários.
+
+Exemplo de caso de sucesso
+
+A Unilever implementou AWS CloudWatch e Lambda para automatizar desligamentos de ambientes de teste fora do expediente, reduzindo em 25% o custo mensal de computação e aumentando a eficiência do time de TI.
+
+## Conclusão
+
+A implementação das ferramentas AWS na Abstergo Industries proporcionou resultados concretos e sustentáveis:
+
+Redução média de 40% nos custos operacionais de TI.
+Segurança reforçada com criptografia e controle de acesso.
+Monitoramento e governança em tempo real, com ações automatizadas.
+Infraestrutura escalável, flexível e de alta performance.
+
+Essas soluções colocam a Abstergo em um patamar de maturidade tecnológica elevado, permitindo crescimento com previsibilidade financeira e sustentabilidade digital.
+
+
+
+Próximos Passos para Modernização
+
+Na Fase 2, a Abstergo pretende evoluir para uma arquitetura serverless e distribuída globalmente, com foco em automação e entrega de conteúdo:
+
+Substituição do processamento manual por AWS Lambda e S3 Event Triggers.
+Implementação de Amazon CloudFront (CDN) para entrega global de mídias.
+Migração de bancos de dados locais para Amazon RDS, com backups automáticos e alta disponibilidade.
+ Criação de um ambiente de FinOps (Financial Operations) com relatórios de custos e previsões automáticas.
+
+
+Assinatura do Responsável pelo Projeto:
+
+[Nome do Responsável pelo Projeto]
